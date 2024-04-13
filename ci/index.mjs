@@ -23,6 +23,8 @@ connect(
         "/src/node_modules",
         client.cacheVolume("node_module_cache"),
       )
+      .withExec(["echo", "Before npm install"]) // Add log statement
+      .withExec(["npm", "cache", "clean", "--force"]) // Clean npm cache
       .withExec(["npm", "install"])
       .withExec(["echo", "npm install completed"]) // Add log statement
 
