@@ -24,14 +24,18 @@ connect(
         client.cacheVolume("node_module_cache"),
       )
       .withExec(["npm", "install"])
+      .withExec(["echo", "npm install completed"]) // Add log statement
 
     // run application tests
-    const test = runner.withExec(["npm", "test", "--", "--watchAll=false"])
+    const test = runner
+    .withExec(["npm", "test", "--", "--watchAll=false"])
+    .withExec(["echo", "npm test completed"]) // Add log statement
 
     // build application
     // write the build output to the host
     await test
       .withExec(["npm", "run", "build"])
+      .withExec(["echo", "npm run build completed"]) // Add log statement
       .directory("./build")
       .export("./build")
 
